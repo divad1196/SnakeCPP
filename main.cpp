@@ -46,15 +46,12 @@ int main() {
         std::cout << std::endl;
 
     Snake snake(40, 40);
-
-    std::cout << snake << std::endl;
-    snake.right();
-    std::cout << snake << std::endl;
-    snake.right();
-    std::cout << snake << std::endl;
-    snake.right();
-    std::cout << snake << std::endl;
-    snake.right();
+    for(size_t i = 0; i < 100; ++i) {
+        std::cout << snake << std::endl;
+        snake.right();
+        std::cout << snake << std::endl;
+        snake.down();
+    }
 
     return EXIT_SUCCESS;
 }

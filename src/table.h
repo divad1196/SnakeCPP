@@ -2,6 +2,7 @@
 #define TABLE_H
 
 #include <vector>
+#include <iostream>
 
 
 template<typename T>
@@ -330,26 +331,28 @@ class Table {
             return m_data.at(index);
         }
 
-        T& at(size_t line, size_t row) {
-            return at(index(line % HEIGHT, row % WIDTH));
+        T& at(size_t row, size_t line) {
+            return at(index(row % WIDTH, line % HEIGHT));
         }
 
-        const T& at(size_t line, size_t row) const {
-            return at(index(line % HEIGHT, row % WIDTH));
+        const T& at(size_t row, size_t line) const {
+            return at(row, line);
         }
 
-        T& at(int line, size_t row) {
-            return at(index(pos_mod(line, HEIGHT), pos_mod(row, WIDTH)));
-            
+        T& at(int row, int line) {
+            return at(index(row, line));
         }
 
-        const T& at(int line, size_t row) const {
-            return at(index(pos_mod(line, HEIGHT), pos_mod(row, WIDTH)));
-            
+        const T& at(int row, int line) const {
+            return at(row, line);
         }
 
-        size_t index(size_t line, size_t row) const {
+        size_t index(size_t row, size_t line) const {
             return row + WIDTH * line;
+        }
+
+        size_t index(int row, int line) const {
+            return index(pos_mod(row, WIDTH), pos_mod(line, HEIGHT));
         }
 
         std::pair<size_t, size_t> coord(size_t index) const {

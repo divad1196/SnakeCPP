@@ -37,14 +37,20 @@ void Snake::down() {
 void Snake::_move(int dx, int dy) {
     size_t head_idx = _board.index(head_x, head_y); 
     size_t next_index = _board.index(head_x + dx, head_y + dy);
-    std::cout << head_idx << std::endl;
-    std::cout << next_index << std::endl;
-    if(_board.at(next_index) != APPLE)
+
+    if(_board.at(next_index) != APPLE) {
+        size_t tmp = _board.at(tail_idx);
         _board.at(tail_idx) = NONE;
+        tail_idx = tmp;
+    }
+
     // else ...
 
     _board.at(head_idx) = next_index;
     _board.at(next_index) = HEAD_VALUE;
+    auto coord = _board.coord(next_index);
+    head_x = coord.first;
+    head_y = coord.second;
 }
 
 
